@@ -1,7 +1,15 @@
 import expo from 'express';
-const app = expo();
-const PORT = 5000;
+import { ENV } from './config/env.js';
+import { connectDB } from './config/db.js';
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const app = expo();
+
+connectDB();
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+app.listen(ENV.PORT, () => {
+  console.log(`Server is running on http://localhost:${ENV.PORT}`);
 });
